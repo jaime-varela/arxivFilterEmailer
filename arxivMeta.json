@@ -1,0 +1,87 @@
+[
+    {
+        "arxivSite": "cs",
+        "authors": [
+            "Ian Goodfellow",
+            "Chris Cummins",
+            "Daniel A. Roberts"
+        ],
+        "words": [
+            "quantum computing",
+            "decoherence",
+            "quantum algorithms",
+            "graph algorithms",
+            "compiler",
+            "RTOS"
+        ]
+    },
+    {
+        "arxivSite": "gr-qc",
+        "authors": [
+            "Steven Weinberg",
+            "Carlo Rovelli",
+            "Sabrina Pasterski",
+            "Robert M. Wald",
+            "William G. Unruh",
+            "Lee Smolin",
+            "Sabine Hossenfelder",
+            "Stacy McGaugh",
+            "Frederic P. Schuller",
+            "Andrew Strominger",
+            "Claus Kiefer",
+            "Roger Penrose",
+            "Abhay Ashtekar",
+            "Claudia de Rham"
+        ],
+        "words": [
+            "quantum computing",
+            "decoherence",
+            "firewall",
+            "conformal gravity",
+            "weyl gravity"
+        ]
+    },
+    {
+        "arxivSite": "hep-th",
+        "authors": [
+            "Steven Weinberg",
+            "Carlo Rovelli",
+            "Robert M. Wald",
+            "William G. Unruh",
+            "Lee Smolin",
+            "Claudia de Rham"
+        ],
+        "words": [
+            "quantum computing",
+            "decoherence",
+            "conformal gravity",
+            "weyl gravity"
+        ]
+    },
+    {
+        "arxivSite": "math-ph",
+        "authors": [
+            "Carlo Rovelli",
+            "Raphael Bousso",
+            "Frederic P. Schuller"
+        ],
+        "words": [
+            "quantum computing",
+            "decoherence",
+            "quantum algorithms",
+            "field theory",
+            "general relativity"
+        ]
+    },
+    {
+        "arxivSite": "astro-ph",
+        "authors": [
+            "Jacques Colin",
+            "Subir Sarkar",
+            "Stacy McGaugh"
+        ],
+        "words": [
+            "non-Copernican observers"
+        ]
+    }
+]

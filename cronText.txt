@@ -1,0 +1,1 @@
+33 15 * * * cd <pathToArxivFilterFolder>/arxivFilterEmailer/ && python3 ArxivEmailerFromMeta.py
