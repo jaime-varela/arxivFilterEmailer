@@ -3,7 +3,7 @@
 A simple arxiv filter and emailer.  I run this on a cron job daily for getting filterd email results from the arxiv rss feed.
 
 
-![example](filteredEmail.png "Filtered email")
+![example](doc/filteredEmail.png "Filtered email")
 
 In order to use one needs to create a 'config.py' file and create a few dictionaries.  See 'sampleConfig.py' to see the necessary dictionary information.
 

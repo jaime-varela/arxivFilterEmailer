@@ -1,3 +1,8 @@
+import smtplib
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 # Set of utilities for Arxiv filter and emailer
 
 ## very specialized html stripper (DO NOT USE ANYWHERE ELSE)
@@ -22,10 +27,6 @@ def htmlBoldWordsInText(text,words):
     return wrapWordsInTags(text,words,"""<b>""","""</b>""")
 
 
-import smtplib
-
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 def sendHtmlEmailFromGoogleAccount(toEmail, fromEmail, subject, plainText,htmlText, username,password):
     me = fromEmail

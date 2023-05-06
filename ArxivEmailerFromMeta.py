@@ -1,27 +1,32 @@
-# ------------------- Set base metadata here ---------------------------------
-baseUrl = "http://export.arxiv.org/rss/"
-metaFileName = "arxivMeta.json"
+# ------------------- Imports ------------------------------------------------
 
 import feedparser
-SEND_EMAILS=True
-IMPORT_DROPBOXFILE=True
+import json
+
+from utils.html_parsing import wrapWordsInTags, htmlBoldWordsInText, strip_html
+from utils.arg_generator import get_default_args
+from utils.html_parsing import sendHtmlEmailFromGoogleAccount
+from config import emailInformation
+
+# ------------------- Set base metadata here ---------------------------------
+baseUrl = "http://export.arxiv.org/rss/"
+
+args = get_default_args()
+metaFileName = args.filter_file
+
 
 # ------------------- get and update metadata json ---------------------------------
 
-if IMPORT_DROPBOXFILE:
-    # set up dropbox
-    import dropbox
-    from config import dropboxInfo
-    dbx = dropbox.Dropbox(dropboxInfo['token'])
+if args.use_dropbox:
     # remove old meta file
     import os
+    from config import dropboxInfo
+    from utils.dropbox import download_dropbox_file
     os.remove(metaFileName)
-    with open(metaFileName, "wb") as f:
-        metadata, res = dbx.files_download(path="/"+metaFileName)
-        f.write(res.content)
+    status = download_dropbox_file(dropbox_path = "/"+metaFileName, 
+                                   target_file = metaFileName
+                                   ,token = dropboxInfo['token'])
 
-# use json parser
-import json
 
 ArxivMetas = []
 
@@ -44,7 +49,6 @@ def EntryMatch(entry,words,authors):
     return MatchType.NONE
 
 
-from utils import wrapWordsInTags, htmlBoldWordsInText, strip_html
 
 for arxivMeta in ArxivMetas:
     #### ---------------- Feed import and email message creation ------------------
@@ -96,13 +100,10 @@ for arxivMeta in ArxivMetas:
     </html>"""
 
     #### ------- e-mail generation ---------------------
-    #from EmailTool import create_message
-    if(result == "" or not SEND_EMAILS):
+    if result == "":
         print("no articles found for " + arxivSite)
         continue
 
-    from utils import sendHtmlEmailFromGoogleAccount
-    from config import emailInformation
     text = result
 
     sendHtmlEmailFromGoogleAccount(toEmail=emailInformation['toEmail'],
