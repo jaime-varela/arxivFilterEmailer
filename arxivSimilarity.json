@@ -1,0 +1,27 @@
+{
+    "settings": {
+        "num_similar_sentences": 4,
+        "title_similarity_threshold": 0.82,
+        "sentence_similarity_threshold": 0.82,
+        "relative_weights": [0.5 , 0.5]
+    },
+    "similarity_searches":
+    [
+        {
+            "arxivSite": "cs",
+            "papers": 
+            [
+                "https://arxiv.org/abs/2111.00396",
+                "https://arxiv.org/abs/2305.02323"
+            ]
+        },
+        {
+            "arxivSite": "math-ph",
+            "papers": 
+            [
+                "https://arxiv.org/abs/2305.02494",
+                "https://arxiv.org/abs/2305.02788"
+            ]
+        }
+    ]
+}
