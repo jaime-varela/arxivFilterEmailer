@@ -3,7 +3,7 @@
         "num_similar_sentences": 4,
         "title_similarity_threshold": 0.82,
         "sentence_similarity_threshold": 0.82,
-        "relative_weights": [0.5 , 0.5]
+        "and_conditional":true
     },
     "similarity_searches":
     [

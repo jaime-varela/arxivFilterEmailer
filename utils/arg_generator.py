@@ -6,3 +6,12 @@ def get_default_args():
     parser.add_argument('--use_dropbox', action='store_true', help='Import dropbox file from root path')
     args = parser.parse_args()
     return args
+
+
+
+def get_similarity_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--similarity_file', type=str, help='Json file to use in similarity comparison (default is arxivSimilarity.json)',default="arxivSimilarity.json")
+    parser.add_argument('--use_dropbox', action='store_true', help='Import dropbox file from root path')
+    args = parser.parse_args()
+    return args
