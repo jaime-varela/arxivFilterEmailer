@@ -3,11 +3,19 @@
 import feedparser
 import json
 
-from utils.html_parsing import wrapWordsInTags, htmlBoldWordsInText, strip_html
+from utils.html_parsing import html_to_text
 from utils.arg_generator import get_similarity_args
 from utils.html_parsing import sendHtmlEmailFromGoogleAccount
 from config import emailInformation
+import arxiv
+import datetime
+from transformers import *
+import re
+# Load the tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
+model = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
 
+# Set up
 
 baseUrl = "http://export.arxiv.org/rss/"
 
@@ -40,7 +48,25 @@ tau_sen = float(settings['sentence_similarity_threshold'])
 use_and = settings['and_conditional']
 
 
+for similarity_check in ArxivSimilarities:
+    id_list = [link.split('/')[-1] for link in similarity_check['papers']]
+    paper_targets = list(arxiv.Search(id_list=id_list).results())
 
-# TODO: pull abstract and title for url link
-# TODO: check the validity of url
+    title_targets = [paper_target.title for paper_target in paper_targets]
+    summary_targets = [re.sub('\n', ' ', paper_target.summary) for paper_target in paper_targets]
+
+    ### ------ filter ----------------------------------
+    arxivSite = similarity_check['arxivSite']
+    siteUrl = baseUrl + arxivSite + "/new"
+    feed = feedparser.parse(siteUrl)
+    ArxivEntries = feed.entries
+
+    title_entries = [entry['title'][0:entry['title'].find("(arXiv:")].strip() for entry in ArxivEntries]
+    summary_entries = [html_to_text(entry['summary']) for entry in ArxivEntries]
+
+    print(summary_targets)
+
+    break
+
 # TODO: make utils to abstract away the similarity scoring
+# TODO: construct email

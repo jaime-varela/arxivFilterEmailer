@@ -2,7 +2,8 @@ import smtplib
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
+from bs4 import BeautifulSoup
+import re
 # Set of utilities for Arxiv filter and emailer
 
 ## very specialized html stripper (DO NOT USE ANYWHERE ELSE)
@@ -106,3 +107,11 @@ def construct_entry_text(entry,matchType, words,authors):
     html += """<p>""" + htmlBoldWordsInText(entry['summary'][3:-4], words)+ """</p>"""
     html += """<br><br></div>"""
     return html, result
+
+def html_to_text(html_text):
+    # Use BeautifulSoup to remove HTML tags
+    soup = BeautifulSoup(html_text, 'html.parser')
+    text = soup.get_text()
+    # Use regular expressions to remove newlines
+    text = re.sub('\n', ' ', text)
+    return text
