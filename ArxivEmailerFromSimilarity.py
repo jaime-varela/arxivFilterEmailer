@@ -6,6 +6,7 @@ import json
 from utils.html_parsing import html_to_text
 from utils.arg_generator import get_similarity_args
 from utils.html_parsing import sendHtmlEmailFromGoogleAccount
+from similarity.embedding_utils import get_mean_pooled_embeddings
 from config import emailInformation
 import arxiv
 import datetime
@@ -64,9 +65,12 @@ for similarity_check in ArxivSimilarities:
     title_entries = [entry['title'][0:entry['title'].find("(arXiv:")].strip() for entry in ArxivEntries]
     summary_entries = [html_to_text(entry['summary']) for entry in ArxivEntries]
 
-    print(summary_targets)
+    embedded_title_targets = get_mean_pooled_embeddings(title_targets,tokenizer,model)
+    embedded_title_entries = get_mean_pooled_embeddings(title_entries,tokenizer,model)
 
-    break
+    # TODO sentence embeddings
 
+    print(embedded_title_targets.shape,embedded_title_entries.shape)
 # TODO: make utils to abstract away the similarity scoring
 # TODO: construct email
+# TODO: reduce memory for edge devices
