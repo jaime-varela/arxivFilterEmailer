@@ -131,3 +131,7 @@ dmypy.json
 
 # config file
 config.py
+
+# profiling files
+mprofile_*.dat
+*.prof
