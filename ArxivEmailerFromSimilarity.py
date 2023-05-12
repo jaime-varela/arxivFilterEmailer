@@ -15,7 +15,7 @@ import re
 import nltk
 nltk.download('punkt')
 from sklearn.metrics.pairwise import cosine_similarity
-
+import numpy as np
 
 # Load the tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
@@ -52,6 +52,7 @@ ArxivSimilarities = ArxivSimilarity['similarity_searches']
 tau_title = float(settings['title_similarity_threshold'])
 tau_sen = float(settings['sentence_similarity_threshold'])
 use_and = settings['and_conditional']
+num_sim = int(settings['num_similar_sentences'])
 
 counter = 0
 for similarity_check in ArxivSimilarities:
@@ -95,6 +96,7 @@ for similarity_check in ArxivSimilarities:
         entry_title_embedding_list.append(entry_title_embedding)
         entry_summary_embedding_list.append(entry_sentence_embeddings)
 
+    found_target_title_pairs = []
     for target_ind in range(len(title_targets)):
         for entry_ind in range(len(title_entries)):
             entry_title_embedding = entry_title_embedding_list[entry_ind]
@@ -106,8 +108,33 @@ for similarity_check in ArxivSimilarities:
             print(f'entry: {entry_title}')
             print(f'title similarity = {cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]}')
             counter += 1
+            title_similarity = cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]
+            title_above_threshold = title_similarity > tau_title
 
-print(f'count = {counter}')            
+            entry_sent_embed = entry_summary_embedding_list[entry_ind]
+            target_sent_embed = target_summary_embedding_list[target_ind]
+            sentence_sim_target_entry = cosine_similarity(target_sent_embed \
+                                                          ,entry_sent_embed)
+            # Find the indices with the highest similarity for each row in the matrix
+            highest_similarity_indices_title_target = np.argmax(sentence_sim_target_entry, axis=1)
+            target_indexes = np.arange(target_sent_embed.shape[0])
+
+            scores_with_indexes = [(sentence_sim_target_entry[i,j],i,j) for i,j in zip(target_indexes,highest_similarity_indices_title_target)]
+            # Sort values
+            sorted_scores_with_indexes = sorted(scores_with_indexes, key=lambda x: x[0], reverse=True)
+            target_num_sent = target_sent_embed.shape[0]
+            entry_num_sent = entry_sent_embed.shape[0]
+            sentence_subset = sorted_scores_with_indexes[0:min(num_sim,min(entry_num_sent,target_num_sent))]
+            top_k_score = np.mean(np.array([score for score,i,j in sentence_subset]))
+            sentences_above_threshold = top_k_score > tau_sen
+
+            is_similar_paper = (title_above_threshold and sentences_above_threshold) \
+                if use_and else (title_above_threshold or sentences_above_threshold) 
+        
+            if is_similar_paper:
+                found_target_title_pairs.append((target_ind,entry_ind))
+
+print(f'found {len(found_target_title_pairs)} for site {arxivSite}')            
 
 
 
