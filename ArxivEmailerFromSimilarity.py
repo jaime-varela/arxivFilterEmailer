@@ -96,17 +96,17 @@ for similarity_check in ArxivSimilarities:
         entry_title_embedding_list.append(entry_title_embedding)
         entry_summary_embedding_list.append(entry_sentence_embeddings)
 
-    found_target_title_pairs = []
+    found_target_entry_pairs = []
     for target_ind in range(len(title_targets)):
         for entry_ind in range(len(title_entries)):
             entry_title_embedding = entry_title_embedding_list[entry_ind]
             target_title_embedding = target_title_embedding_list[target_ind]
             entry_title = title_entries[entry_ind]
             target_title = title_targets[target_ind]
-            print("Anchor and positive title similarity")
-            print(f'target: {target_title}')
-            print(f'entry: {entry_title}')
-            print(f'title similarity = {cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]}')
+            # print("Anchor and positive title similarity")
+            # print(f'target: {target_title}')
+            # print(f'entry: {entry_title}')
+            # print(f'title similarity = {cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]}')
             counter += 1
             title_similarity = cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]
             title_above_threshold = title_similarity > tau_title
@@ -132,9 +132,14 @@ for similarity_check in ArxivSimilarities:
                 if use_and else (title_above_threshold or sentences_above_threshold) 
         
             if is_similar_paper:
-                found_target_title_pairs.append((target_ind,entry_ind))
+                found_target_entry_pairs.append((target_ind,entry_ind))
 
-print(f'found {len(found_target_title_pairs)} for site {arxivSite}')            
+    print(f'found {len(found_target_entry_pairs)} for site {arxivSite}')  
+    for target_ind, entry_ind in found_target_entry_pairs:
+
+
+        print(f'found target: {title_targets[target_ind]}')   
+        print(f'found entry: {title_entries[entry_ind]}')
 
 
 
