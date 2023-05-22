@@ -115,3 +115,8 @@ def html_to_text(html_text):
     # Use regular expressions to remove newlines
     text = re.sub('\n', ' ', text)
     return text
+
+def construct_similarity_entry(entry_title,entry_summary,target_title,target_summary):
+    # TODO: implement
+
+    return "",""

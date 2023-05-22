@@ -7,6 +7,7 @@ from utils.html_parsing import html_to_text
 from utils.arg_generator import get_similarity_args
 from utils.html_parsing import sendHtmlEmailFromGoogleAccount
 from similarity.embedding_utils import get_mean_pooled_embeddings
+from utils.html_parsing import construct_similarity_entry
 from config import emailInformation
 import arxiv
 import datetime
@@ -103,10 +104,7 @@ for similarity_check in ArxivSimilarities:
             target_title_embedding = target_title_embedding_list[target_ind]
             entry_title = title_entries[entry_ind]
             target_title = title_targets[target_ind]
-            # print("Anchor and positive title similarity")
-            # print(f'target: {target_title}')
-            # print(f'entry: {entry_title}')
-            # print(f'title similarity = {cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]}')
+
             counter += 1
             title_similarity = cosine_similarity(entry_title_embedding,target_title_embedding)[0,0]
             title_above_threshold = title_similarity > tau_title
@@ -135,17 +133,43 @@ for similarity_check in ArxivSimilarities:
                 found_target_entry_pairs.append((target_ind,entry_ind))
 
     print(f'found {len(found_target_entry_pairs)} for site {arxivSite}')  
+    entries_found = len(found_target_entry_pairs) > 0
+    if entries_found:
+        html_result  = """\
+        <html>
+          <head></head>
+          <body>
+        """
+        text_result = ""
+
+        html_result += f'<h1> Similarity Results for {arxivSite}<\h1>'
+        text_result += f'Similarity Results for {arxivSite}\n'
     for target_ind, entry_ind in found_target_entry_pairs:
 
+        title_target = title_targets[target_ind]
+        summary_target = summary_targets[target_ind]   
+        title_entry = title_entries[entry_ind]
+        summary_entry = summary_entries[entry_ind]
 
-        print(f'found target: {title_targets[target_ind]}')   
-        print(f'found entry: {title_entries[entry_ind]}')
+        html_temp ,text_temp = construct_similarity_entry(title_entry,
+                                                        summary_entry,
+                                                        title_target,
+                                                        summary_target)
+        html_result += html_temp
+        text_result += text_temp
+
+    if entries_found:
+        html_result += """</body>
+        </html>"""
+
+        sendHtmlEmailFromGoogleAccount(toEmail=emailInformation['toEmail'],
+            fromEmail=emailInformation['fromEmail'],
+            subject="Similarity Filter for Arxiv " + arxivSite,
+            plainText=text_result,
+            htmlText=html_result,
+            username=emailInformation['username'],
+            password=emailInformation['password'])
 
 
 
-
-
-# TODO: make utils to abstract away the similarity scoring
 # TODO: construct email
-# TODO: improve performance?  May not matter if we're willing to wait
-# TODO: reduce memory for edge devices
