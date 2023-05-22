@@ -137,12 +137,24 @@ for similarity_check in ArxivSimilarities:
     if entries_found:
         html_result  = """\
         <html>
-          <head></head>
+          <head>
+              <style>
+                table {{
+                  width: 100%;
+                  border-collapse: collapse;
+                }}
+            
+                td {{
+                  padding: 10px;
+                  border: 1px solid black;
+                }}
+              </style>          
+          </head>
           <body>
         """
         text_result = ""
 
-        html_result += f'<h1> Similarity Results for {arxivSite}<\h1>'
+        html_result += f'<h1> Similarity Results for {arxivSite}</h1>'
         text_result += f'Similarity Results for {arxivSite}\n'
     for target_ind, entry_ind in found_target_entry_pairs:
 

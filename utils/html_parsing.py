@@ -117,6 +117,20 @@ def html_to_text(html_text):
     return text
 
 def construct_similarity_entry(entry_title,entry_summary,target_title,target_summary):
-    # TODO: implement
-
-    return "",""
+    html_template = '''
+      <table>
+        <tr>
+          <td>
+            <h2>{title1}</h2>
+            <p>{abstract1}</p>
+          </td>
+          <td>
+            <h2>{title2}</h2>
+            <p>{abstract2}</p>
+          </td>
+        </tr>
+      </table>
+    '''    
+    text_res = entry_title + "\n" + entry_summary + "\n" + target_title + "\n" + target_summary
+    html_code = html_template.format(title1=entry_title,abstract1=entry_summary,title2=target_title,abstract2=target_summary)
+    return html_code,text_res
