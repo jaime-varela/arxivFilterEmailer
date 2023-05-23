@@ -116,21 +116,28 @@ def html_to_text(html_text):
     text = re.sub('\n', ' ', text)
     return text
 
-def construct_similarity_entry(entry_title,entry_summary,target_title,target_summary):
+def construct_similarity_entry(entry_title,entry_summary,entry_link, target_title,target_summary,target_link):
+
+    #<a href=\"""" + entry['id'] + """\">""" + wrapWordsInTags(TITLE, words,"""<span style="color:darkblue">""","""</span>""") + """</a>
     html_template = '''
-      <table>
+      <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td>
-            <h2>{title1}</h2>
+          <td style="padding: 10px; border: 1px solid black;">
+            <h2><a href="{link1}">{title1}</a></h2>
             <p>{abstract1}</p>
           </td>
-          <td>
-            <h2>{title2}</h2>
+          <td style="padding: 10px; border: 1px solid black; color: #888888;">
+            <h2><a href="{link2}" style="color: #888888;">{title2}</a></h2>
             <p>{abstract2}</p>
           </td>
         </tr>
       </table>
     '''    
     text_res = entry_title + "\n" + entry_summary + "\n" + target_title + "\n" + target_summary
-    html_code = html_template.format(title1=entry_title,abstract1=entry_summary,title2=target_title,abstract2=target_summary)
+    html_code = html_template.format(title1=entry_title,
+                                     abstract1=entry_summary,
+                                     title2=target_title,
+                                     abstract2=target_summary,
+                                     link1=entry_link,
+                                     link2=target_link)
     return html_code,text_res

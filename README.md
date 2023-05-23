@@ -41,11 +41,11 @@ Running this around mid-day should run the filter and send an email.  It's best 
 Using [Sci-bert](https://github.com/allenai/scibert) as a sentence encoder.  The file `ArxivEmailerFromSimilarity.py` uses machine learning sentence
 embeddings to measure the text similarity between two arxiv articles.
 
-The program finds similar articles to the ones listed in the file `arxivSimilarity.json`.  As an example:
+The program finds similar articles to the ones listed in the file `arxivSimilarity.json`.  The following is an example output:
 
-TODO Example
+![similarityExample](doc/similarityEmail.png "Similarity email")
 
-The structure of the Json file is:
+A sample json file is provided.  The structure of the Json file is:
 
 ```json
 {

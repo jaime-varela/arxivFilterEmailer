@@ -72,6 +72,11 @@ for similarity_check in ArxivSimilarities:
     print(len(ArxivEntries),len(title_targets))
     title_entries = [entry['title'][0:entry['title'].find("(arXiv:")].strip() for entry in ArxivEntries]
     summary_entries = [html_to_text(entry['summary']) for entry in ArxivEntries]
+
+    entry_links = [entry['id'] for entry in ArxivEntries]
+    target_links = [link for link in similarity_check['papers']]
+
+
     assert(len(title_entries) == len(summary_entries))
     print(f'{arxivSite} number of entries = {len(title_entries)}')
 
@@ -163,10 +168,15 @@ for similarity_check in ArxivSimilarities:
         title_entry = title_entries[entry_ind]
         summary_entry = summary_entries[entry_ind]
 
+        entry_link = entry_links[entry_ind]
+        target_link = target_links[target_ind]
+
         html_temp ,text_temp = construct_similarity_entry(title_entry,
                                                         summary_entry,
+                                                        entry_link,
                                                         title_target,
-                                                        summary_target)
+                                                        summary_target,
+                                                        target_link)
         html_result += html_temp
         text_result += text_temp
 
