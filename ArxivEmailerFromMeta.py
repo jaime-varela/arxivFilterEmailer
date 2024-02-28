@@ -6,7 +6,7 @@ from utils.arg_generator import get_default_args
 from utils.html_parsing import sendHtmlEmailFromGoogleAccount
 from config import emailInformation
 
-baseUrl = "http://export.arxiv.org/rss/"
+baseUrl = "https://rss.arxiv.org/rss/"
 
 args = get_default_args()
 metaFileName = args.filter_file
@@ -39,7 +39,7 @@ for arxivMeta in ArxivMetas:
     authors = arxivMeta['authors']
 
     ### ------ filter ----------------------------------
-    siteUrl = baseUrl + arxivSite + "/new"
+    siteUrl = baseUrl + arxivSite
     feed = feedparser.parse(siteUrl)
     ArxivEntries = feed.entries
 

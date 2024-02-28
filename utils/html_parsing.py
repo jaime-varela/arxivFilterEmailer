@@ -83,16 +83,17 @@ def EntryMatch(entry,words,authors):
 def construct_entry_text(entry,matchType, words,authors):
     result = ""
     html = ""
-    TITLE = entry['title'][0:entry['title'].find("(arXiv:")]
+    TITLE = entry['title']
     result += TITLE + "\n \t"
     sep = ", "
     entryAuthors = entry['author'].split(sep)
-    entryAuthors = [strip_html(entry) for entry in entryAuthors]
+    entryAuthors = [entry for entry in entryAuthors]
     result += sep.join(entryAuthors) + "\n \n"
-    result += entry['summary'][3:-4] + "\n \n"
+    summary_text = entry['summary'][entry['summary'].find("Abstract:")+9:]
+    result += summary_text + "\n \n"
     ## html entry
     html += """<div>"""
-    html += """<p style="color:blue;font-size:1.17em;"><b><a href=\"""" + entry['id'] + """\">""" + wrapWordsInTags(TITLE, words,"""<span style="color:darkblue">""","""</span>""") + """</a></b></p>"""
+    html += """<p style="color:blue;font-size:1.17em;"><b><a href=\"""" + entry['link'] + """\">""" + wrapWordsInTags(TITLE, words,"""<span style="color:darkblue">""","""</span>""") + """</a></b></p>"""
     if(matchType != MatchType.AUTHOR):
         html += """<p><i>""" + sep.join(entryAuthors) + """<i></p><br>"""
     else:
@@ -104,7 +105,7 @@ def construct_entry_text(entry,matchType, words,authors):
                 html += authName + " , "
         html = html[:len(html)-2]
         html +=  """<i></p><br>"""
-    html += """<p>""" + htmlBoldWordsInText(entry['summary'][3:-4], words)+ """</p>"""
+    html += """<p>""" + htmlBoldWordsInText(summary_text, words)+ """</p>"""
     html += """<br><br></div>"""
     return html, result
 

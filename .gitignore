@@ -135,3 +135,6 @@ config.py
 # profiling files
 mprofile_*.dat
 *.prof
+
+# test files
+*_test.py
