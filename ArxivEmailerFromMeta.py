@@ -30,6 +30,7 @@ ArxivMetas = []
 with open(metaFileName) as json_file:
     ArxivMetas = json.load(json_file)
 
+arxiv_topic_no_paper_count = 0
 
 for arxivMeta in ArxivMetas:
     #### ---------------- Feed import and email message creation ------------------
@@ -63,6 +64,7 @@ for arxivMeta in ArxivMetas:
     #### ------- e-mail generation ---------------------
     if result == "":
         print("no articles found for " + arxivSite)
+        arxiv_topic_no_paper_count += 1
         continue
 
     text = result
@@ -74,3 +76,15 @@ for arxivMeta in ArxivMetas:
     htmlText=html,
     username=emailInformation['username'],
     password=emailInformation['password'])
+
+
+if arxiv_topic_no_paper_count == len(ArxivMetas):
+    print("no articles found for any arxiv topic")
+
+    sendHtmlEmailFromGoogleAccount(toEmail=emailInformation['toEmail'],
+                                   fromEmail=emailInformation['fromEmail'],
+                                   subject="No articles found for any arxiv topic",
+                                   plainText="No articles found for any arxiv topic",
+                                   htmlText="<b>No articles found for any arxiv topic</b>",
+                                   username=emailInformation['username'],
+                                   password=emailInformation['password'])
