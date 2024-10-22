@@ -33,6 +33,8 @@ Here 'arxivSite' is the arxive site (cs or hep-th for example), 'authors' is an 
 
 Running this around mid-day should run the filter and send an email.  It's best to set up a cron job as needed, see 'cronText.txt' as an example for a daily emailer.
 
+I also set up a weekly emailer instead but that requires state to keep the entries for later use. I had planned to use the OAI API but it is difficult to work with.
+
 
 ## Similarity Filter
 

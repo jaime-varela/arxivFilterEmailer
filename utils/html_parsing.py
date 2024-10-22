@@ -71,6 +71,27 @@ class MatchType(Enum):
     SUMMARY=3
     NONE=4
 
+
+def match_type_to_description(match_enum: MatchType) -> str:
+    if match_enum == MatchType.AUTHOR:
+        return 'author'
+    elif match_enum == MatchType.TITLE:
+        return 'title'
+    elif match_enum == MatchType.SUMMARY:
+        return 'summary'
+    return ''
+
+def description_to_match_type(desc: str) -> MatchType:
+    if desc == 'author':
+        return MatchType.AUTHOR
+    elif desc == 'title':
+        return MatchType.TITLE
+    elif desc == 'summary':
+        return MatchType.SUMMARY
+    return MatchType.NONE
+
+
+
 ## filters
 def EntryMatch(entry,words,authors):
     # author has the highest priority
@@ -142,3 +163,24 @@ def construct_similarity_entry(entry_title,entry_summary,entry_link, target_titl
                                      link1=entry_link,
                                      link2=target_link)
     return html_code,text_res
+
+
+def construct_email_from_saved_entry_list(entry_list,words,authors):
+
+    result = ""
+    html = """\
+    <html>
+      <head></head>
+      <body>
+    """
+    for entry_value in entry_list:
+        matchType = description_to_match_type(entry_value['match'])
+        entry = entry_value['entry']
+        html_entry, text_entry = construct_entry_text(entry,matchType,words=words,authors=authors)
+        html += html_entry
+        result += text_entry
+
+    html += """</body>
+    </html>"""
+
+    return html, result

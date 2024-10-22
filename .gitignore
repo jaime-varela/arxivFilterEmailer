@@ -138,3 +138,8 @@ mprofile_*.dat
 
 # test files
 *_test.py
+
+
+*.pkl
+*.pickle
+data/
