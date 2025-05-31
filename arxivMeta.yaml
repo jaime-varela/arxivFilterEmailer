@@ -1,0 +1,53 @@
+arxiv_sites:
+  - arxivSite: "cs"
+    authors:
+      - "Ian Goodfellow" # developer of GAN's and author of the ML book
+      - "Chris Cummins" # Compilers + ML
+      - "Daniel A. Roberts"
+    words:
+    - "quantum computing"
+    - "bayesian"
+    - "decoherence"
+    - "quantum algorithms"
+    - "graph algorithms"
+    - "compiler"
+    - "RTOS"
+
+
+  - arxivSite: "math"
+    authors:
+    - "Robert M. Wald"
+    - "William G. Unruh"
+    - "Lee Smolin"
+
+
+
+  - arxivSite: "gr-qc"
+    authors:
+    - "Robert M. Wald" # QFT in curved space book
+    - "William G. Unruh" # radiation from BH
+    - "Lee Smolin"
+    - "Frederic P. Schuller"
+    - "Abhay Ashtekar"
+    - "Kevin Murphy"
+    words:
+
+
+  - arxivSite: "hep-th"
+    authors:
+    - "Robert M. Wald"
+    - "William G. Unruh"
+    - "Sabine Hossenfelder"
+    - "James Halverson"
+    - "Jim Halverson"
+    words:
+
+
+  - arxivSite: "math-ph"
+    authors:
+    - "Carlo Rovelli"
+    - "Robert M. Wald"
+    - "William G. Unruh"
+    words:
+      
+

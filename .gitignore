@@ -142,4 +142,6 @@ mprofile_*.dat
 
 *.pkl
 *.pickle
+check_file_loads.py
 data/
+data_example/

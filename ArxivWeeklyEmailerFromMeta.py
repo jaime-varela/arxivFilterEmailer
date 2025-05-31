@@ -10,6 +10,7 @@ from utils.html_parsing import match_type_to_description
 from config import emailInformation
 import pickle
 import datetime
+import yaml
 
 baseUrl = "https://rss.arxiv.org/rss/"
 
@@ -38,9 +39,14 @@ if args.use_dropbox:
                                    ,token = dropboxInfo['token'])
 
 
-
-with open(metaFileName) as json_file:
-    ArxivMetas = json.load(json_file)
+if str(metaFileName).endswith(".json"):
+    with open(metaFileName) as json_file:
+        ArxivMetas = json.load(json_file)
+else:
+    # assume Yaml as default
+    with open(metaFileName) as f:
+        ArxivYamlMetas = yaml.safe_load(f)
+    ArxivMetas = ArxivYamlMetas['arxiv_sites']
 
 arxiv_topic_no_paper_count = 0
 
@@ -48,8 +54,8 @@ for arxivMeta in ArxivMetas:
     #### ---------------- Feed import and email message creation ------------------
     arxivSite = arxivMeta['arxivSite']
 
-    words = arxivMeta['words']
-    authors = arxivMeta['authors']
+    words = arxivMeta.get('words',[])
+    authors = arxivMeta.get('authors',[])
 
     ### ------ filter ----------------------------------
     siteUrl = baseUrl + arxivSite
@@ -71,9 +77,8 @@ if day_of_week == DAY_OF_WEEK_TO_SEND:
     for arxivMeta in ArxivMetas:
         arxivSite = arxivMeta['arxivSite']
 
-        words = arxivMeta['words']
-        authors = arxivMeta['authors']
-
+        words = arxivMeta.get('words',[])
+        authors = arxivMeta.get('authors',[])
         # load the entries
         file_to_load = f'data/{arxivSite}_entries.pkl'
         with open(file_to_load,'rb') as f:
