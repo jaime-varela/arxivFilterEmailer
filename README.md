@@ -31,7 +31,18 @@ The 'arxivMeta.json' contains a json file with and array of objects of the form:
 
 Here 'arxivSite' is the arxive site (cs or hep-th for example), 'authors' is an arxiv author you want filtered (copy and paste the author name from arxiv, needs to be full name), and 'words' are a set of words you want filtered from the abstracts.
 
-Running this around mid-day should run the filter and send an email.  It's best to set up a cron job as needed, see 'cronText.txt' as an example for a daily emailer.
+For the weekly emailer, one can also use a `yaml` file instead of the json using the format in the example `arxivMeta.yaml`.
+
+
+## Running
+
+The command to run the emailer with the file is:
+
+```bash
+python3 ArxivEmailerFromMeta.py --filter_file arxivMeta.json 
+```
+
+Running the above command around mid-day should run the filter and send an email.  It's best to set up a cron job as needed, see 'cronText.txt' as an example for a daily emailer.
 
 I also set up a weekly emailer instead but that requires state to keep the entries for later use. I had planned to use the OAI API but it is difficult to work with.
 
