@@ -31,7 +31,7 @@ The 'arxivMeta.json' contains a json file with and array of objects of the form:
 
 Here 'arxivSite' is the arxive site (cs or hep-th for example), 'authors' is an arxiv author you want filtered (copy and paste the author name from arxiv, needs to be full name), and 'words' are a set of words you want filtered from the abstracts.
 
-For the weekly emailer, one can also use a `yaml` file instead of the json using the format in the example `arxivMeta.yaml`.
+One can also use a `yaml` file instead of the json using the format in the example `arxivMeta.yaml`.
 
 
 ## Running

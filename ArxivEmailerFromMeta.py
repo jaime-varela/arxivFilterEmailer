@@ -5,6 +5,7 @@ from utils.html_parsing import EntryMatch,construct_entry_text, MatchType
 from utils.arg_generator import get_default_args
 from utils.html_parsing import sendHtmlEmailFromGoogleAccount
 from config import emailInformation
+import yaml
 
 baseUrl = "https://rss.arxiv.org/rss/"
 
@@ -27,8 +28,14 @@ if args.use_dropbox:
 
 ArxivMetas = []
 
-with open(metaFileName) as json_file:
-    ArxivMetas = json.load(json_file)
+if str(metaFileName).endswith(".json"):
+    with open(metaFileName) as json_file:
+        ArxivMetas = json.load(json_file)
+else:
+    # assume Yaml as default
+    with open(metaFileName) as f:
+        ArxivYamlMetas = yaml.safe_load(f)
+    ArxivMetas = ArxivYamlMetas['arxiv_sites']
 
 arxiv_topic_no_paper_count = 0
 
@@ -36,8 +43,8 @@ for arxivMeta in ArxivMetas:
     #### ---------------- Feed import and email message creation ------------------
     arxivSite = arxivMeta['arxivSite']
 
-    words = arxivMeta['words']
-    authors = arxivMeta['authors']
+    words = arxivMeta.get('words',[])
+    authors = arxivMeta.get('authors',[])
 
     ### ------ filter ----------------------------------
     siteUrl = baseUrl + arxivSite
