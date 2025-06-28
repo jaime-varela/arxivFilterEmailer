@@ -4,14 +4,56 @@ arxiv_sites:
       - "Ian Goodfellow" # developer of GAN's and author of the ML book
       - "Chris Cummins" # Compilers + ML
       - "Daniel A. Roberts"
+      - "Sham Kakade"
+      - "Sham M. Kakade"
+      - "Eran Malach"
+      - "Zongyi Li"
+      - "Cynthia Rudin"
+      - "Jonathon Shlens"
+      - "Adam Wierman"
+      - "Max Vladymyrov"
+      - "Tess Smidt"
+      - "Yang Song"
+      - "Stefano Ermon"
+      - "Ben Poole"
+      - "Michael M. Bronstein"
+      - "Lek-Heng Lim"
+      - "Patrick Kidger"
+      - "Albert Gu"
+      - "Christopher Re"
+      - "Zijie Li"
+      - "Kazem Meidani"
+      - "Amir Barati Farimani"
+      - "Yaron Lipman"
+      - "Ricky T. Q. Chen"
+      - "Steven G. Johnson" # old advisor and numerical ML
+      - "Zachary Teed"
+      - "Jia Deng"
+      - "James Halverson"
+      - "Jim Halverson"
+      - "Rose Yu" # Equivarian ML and some geo-spatial ML
+      - "Katiana Kontolati"
+      - "Jonas Peters"
+      - "Philippe Rigollet"
+      - "Kevin Murphy"
+      - "Christopher Rackauckas"
+      - "Amy R. Ward"
+      - "Prafulla Dhariwal"
+      - "Mark Chen"
+      - "Ilya Sutskever"
+      - "William T. Freeman"
+      - "Mark Hamilton"
+      - "Armand Joulin"
+      - "Jonas Spinner" # people working on ML+High energy physics (maybe move to hep-ph?) 
+      - "Luigi Favaro" # ML + HEP
+      - "Peter Lippmann" # ML + HEP
+      - "Sebastian Pitz" # ML + HEP
+      - "Gerrit Gerhartz" # ML + HEP
+      - "Tilman Plehn" # ML + HEP
+      - "Fred A. Hamprecht" # ML + HEP
+      - "Jesse Thaler" # ML + HEP
+
     words:
-    - "quantum computing"
-    - "bayesian"
-    - "decoherence"
-    - "quantum algorithms"
-    - "graph algorithms"
-    - "compiler"
-    - "RTOS"
 
 
   - arxivSite: "math"
@@ -19,17 +61,38 @@ arxiv_sites:
     - "Robert M. Wald"
     - "William G. Unruh"
     - "Lee Smolin"
+    - "Frederic P. Schuller"
+    - "Abhay Ashtekar"
+    - "Adam Wierman"
+    - "Steven G. Johnson"
+    - "James Halverson"
+    - "Rose Yu"
+    - "James Halverson"
+    - "Jim Halverson"
+    - "Ivan Corwin"
+    - "Hao Shen"
+    - "Philippe Rigollet"
+    - "Kevin Murphy"
 
 
 
   - arxivSite: "gr-qc"
     authors:
-    - "Robert M. Wald" # QFT in curved space book
-    - "William G. Unruh" # radiation from BH
-    - "Lee Smolin"
+    - "Robert M. Wald"
+    - "William G. Unruh"
+    - "Sabine Hossenfelder"
     - "Frederic P. Schuller"
+    - "Claus Kiefer"
+    - "Roger Penrose"
     - "Abhay Ashtekar"
-    - "Kevin Murphy"
+    - "Claudia de Rham"
+    - "Gerard t Hooft"
+    - "Steven B. Giddings"
+    - "Raghu Mahajan"
+    - "Jonathan Oppenheim"
+    - "James Halverson"
+    - "Jim Halverson"
+    - "Roman Vershynin"
     words:
 
 
@@ -38,6 +101,14 @@ arxiv_sites:
     - "Robert M. Wald"
     - "William G. Unruh"
     - "Sabine Hossenfelder"
+    - "Frederic P. Schuller"
+    - "Claus Kiefer"
+    - "Roger Penrose"
+    - "Abhay Ashtekar"
+    - "Claudia de Rham"
+    - "Gerard t Hooft"
+    - "Steven B. Giddings"
+    - "Jonathan Oppenheim"
     - "James Halverson"
     - "Jim Halverson"
     words:
@@ -48,6 +119,13 @@ arxiv_sites:
     - "Carlo Rovelli"
     - "Robert M. Wald"
     - "William G. Unruh"
+    - "Lee Smolin"
+    - "Sabine Hossenfelder"
+    - "Frederic P. Schuller"
+    - "Abhay Ashtekar"
+    - "James Halverson"
+    - "Ivan Corwin"
+    - "Hao Shen"
     words:
       
 

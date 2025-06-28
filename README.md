@@ -103,3 +103,9 @@ $$
 
 where the $\tau$'s are the thresholds defined in the config file and $\mathcal{O}$ is "and" if `and_conditional` is true and "or" otherwise.
 One might need to modify the scores as needed.
+
+
+## JMLR Emailer
+
+This checks the RSS feed from JMLR and sends an email if there is new content. State is 
+stored in /jmlr_data . Currently I check every week for new content on my cronjob.
