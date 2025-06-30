@@ -54,8 +54,8 @@ for arxivMeta in ArxivMetas:
     #### ---------------- Feed import and email message creation ------------------
     arxivSite = arxivMeta['arxivSite']
 
-    words = arxivMeta.get('words',[])
-    authors = arxivMeta.get('authors',[])
+    words = arxivMeta.get('words',[]) or []
+    authors = arxivMeta.get('authors',[]) or []
 
     ### ------ filter ----------------------------------
     siteUrl = baseUrl + arxivSite
@@ -77,8 +77,8 @@ if day_of_week == DAY_OF_WEEK_TO_SEND:
     for arxivMeta in ArxivMetas:
         arxivSite = arxivMeta['arxivSite']
 
-        words = arxivMeta.get('words',[])
-        authors = arxivMeta.get('authors',[])
+        words = arxivMeta.get('words',[]) or []
+        authors = arxivMeta.get('authors',[]) or []
         # load the entries
         file_to_load = f'data/{arxivSite}_entries.pkl'
         with open(file_to_load,'rb') as f:
